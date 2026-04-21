@@ -104,7 +104,7 @@ focus-me/
 ├── styles.css             # Shared styles for popup and settings page
 ├── generate_icons.html    # Helper page to generate PNG icons
 ├── icons/                 # Extension icons (16 × 16, 48 × 48, 128 × 128)
-├── __tests__/
+├── tests/
 │   └── background.test.js # Jest unit tests for background.js
 ├── package.json           # Dev dependencies (Jest)
 └── .gitignore
