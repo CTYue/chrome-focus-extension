@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Open this file in Chrome, then right-click each canvas and "Save image as" to icons/ -->
+<html>
+<head><title>Generate Icons</title></head>
+<body>
+<p>Right-click each canvas below → "Save image as" → save to the <code>icons/</code> folder with the given name.</p>
+
+<script>
+  function drawIcon(size) {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    canvas.title = `icon${size}.png`;
+    const ctx = canvas.getContext('2d');
+
+    // Background
+    const grad = ctx.createLinearGradient(0, 0, size, size);
+    grad.addColorStop(0, '#4f46e5');
+    grad.addColorStop(1, '#7c3aed');
+    ctx.fillStyle = grad;
+    roundRect(ctx, 0, 0, size, size, size * 0.22);
+    ctx.fill();
+
+    // Pause bars (focus symbol)
+    ctx.fillStyle = 'white';
+    const barW = size * 0.18;
+    const barH = size * 0.44;
+    const barY = size * 0.28;
+    const gap = size * 0.1;
+    const totalW = barW * 2 + gap;
+    const startX = (size - totalW) / 2;
+    roundRect(ctx, startX, barY, barW, barH, barW * 0.3);
+    ctx.fill();
+    roundRect(ctx, startX + barW + gap, barY, barW, barH, barW * 0.3);
+    ctx.fill();
+
+    const label = document.createElement('p');
+    label.textContent = `icon${size}.png`;
+    document.body.appendChild(label);
+    document.body.appendChild(canvas);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  [16, 48, 128].forEach(drawIcon);
+</script>
+</body>
+</html>

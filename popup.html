@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus Me</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { width: 264px; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+      </svg>
+    </div>
+    <h1>Focus Me</h1>
+  </div>
+
+  <div class="toggle-row">
+    <label for="enabledToggle" style="font-weight:500">Focus Mode</label>
+    <label class="toggle">
+      <input type="checkbox" id="enabledToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-label">Windows</span>
+      <span class="stat-value" id="windowCount">—</span>
+      <span class="stat-limit" id="windowLimit"></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Tabs (window)</span>
+      <span class="stat-value" id="tabCount">—</span>
+      <span class="stat-limit" id="tabLimit"></span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="mergeBtn">Merge Windows</button>
+    <button class="btn btn-secondary" id="openOptions">Settings</button>
+  </div>
+  <div id="mergeStatus" style="font-size:12px;color:#718096;text-align:center;padding:0 16px 10px;display:none"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

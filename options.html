@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus Me — Settings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="options-page">
+
+  <div class="options-header">
+    <h1>Focus Me Settings</h1>
+    <p>Control how many Chrome windows and tabs you can have open at once.</p>
+  </div>
+
+  <!-- General -->
+  <div class="section">
+    <div class="section-title">General</div>
+
+    <div class="field-row">
+      <div class="field-info">
+        <span class="field-label">Enable Focus Mode</span>
+        <span class="field-desc">Enforce window and tab limits</span>
+      </div>
+      <div class="field-control">
+        <label class="toggle">
+          <input type="checkbox" id="enabled">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-info">
+        <span class="field-label">Show notifications</span>
+        <span class="field-desc">Alert when a window or tab is blocked</span>
+      </div>
+      <div class="field-control">
+        <label class="toggle">
+          <input type="checkbox" id="notifyBlocked">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Limits -->
+  <div class="section">
+    <div class="section-title">Limits</div>
+
+    <div class="field-row">
+      <div class="field-info">
+        <span class="field-label">Max windows</span>
+        <span class="field-desc">Extra windows are converted to tabs</span>
+      </div>
+      <div class="field-control">
+        <input
+          type="number"
+          id="maxWindows"
+          class="number-input"
+          min="1"
+          max="20"
+          value="1"
+        >
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-info">
+        <span class="field-label">Max tabs per window</span>
+        <span class="field-desc">Set to 0 for unlimited tabs</span>
+      </div>
+      <div class="field-control">
+        <input
+          type="number"
+          id="maxTabs"
+          class="number-input"
+          min="0"
+          max="500"
+          value="20"
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="save-row">
+    <button class="btn btn-primary" id="saveBtn" style="flex:0;padding:8px 20px">Save</button>
+    <span class="save-status" id="saveStatus">Settings saved</span>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
