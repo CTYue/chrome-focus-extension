@@ -2,6 +2,12 @@
 
 A Chrome extension that helps you stay focused by limiting the number of browser windows and tabs you can have open at once.
 
+<p align="center">
+  <img src="docs/popup.svg" alt="Focus Me popup" width="220"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/settings.svg" alt="Focus Me settings page" width="300"/>
+</p>
+
 ## Features
 
 - **Window limit** — opening a new Chrome window above the configured limit automatically redirects its tabs into your existing window instead, and switches to the new tab so you never lose where you were going
@@ -55,6 +61,11 @@ Right-click the extension icon → **Options**, or click **Settings** in the pop
 Settings are saved to `chrome.storage.sync` and sync across your Chrome profile on all devices.
 
 ## How it works
+
+<p align="center">
+  <img src="docs/flow.svg" alt="Merge Windows flow diagram" width="560"/>
+</p>
+
 
 ### Window enforcement
 

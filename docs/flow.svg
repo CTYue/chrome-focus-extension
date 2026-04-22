@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400">
+  <defs>
+    <filter id="card-shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#00000020"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1"/>
+    </marker>
+    <marker id="arrowhead-gray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="400" fill="#f5f3ff"/>
+
+  <!-- Title -->
+  <text x="320" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1e1b4b">Merge Windows — How It Works</text>
+
+  <!-- ── BEFORE ── -->
+  <text x="158" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#6366f1" letter-spacing="1">BEFORE</text>
+
+  <!-- Window A -->
+  <rect x="30" y="76" width="118" height="180" rx="10" fill="white" filter="url(#card-shadow)" stroke="#c7d2fe" stroke-width="1.5"/>
+  <rect x="30" y="76" width="118" height="28" rx="10" fill="#4f46e5"/>
+  <rect x="30" y="90" width="118" height="14" fill="#4f46e5"/>
+  <text x="89" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="white">Window A  (ID 101)</text>
+
+  <!-- Tabs in Window A -->
+  <rect x="42" y="116" width="94" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="60" y="133" font-family="system-ui, sans-serif" font-size="10" fill="#4f46e5">Tab #201 — Gmail</text>
+
+  <rect x="42" y="148" width="94" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="60" y="165" font-family="system-ui, sans-serif" font-size="10" fill="#4f46e5">Tab #203 — GitHub</text>
+
+  <rect x="42" y="180" width="94" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="60" y="197" font-family="system-ui, sans-serif" font-size="10" fill="#4f46e5">Tab #207 — Docs</text>
+
+  <!-- Window B -->
+  <rect x="162" y="76" width="118" height="180" rx="10" fill="white" filter="url(#card-shadow)" stroke="#c7d2fe" stroke-width="1.5"/>
+  <rect x="162" y="76" width="118" height="28" rx="10" fill="#7c3aed"/>
+  <rect x="162" y="90" width="118" height="14" fill="#7c3aed"/>
+  <text x="221" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="white">Window B  (ID 105)</text>
+
+  <!-- Tabs in Window B -->
+  <rect x="174" y="116" width="94" height="26" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="192" y="133" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">Tab #202 — Maps</text>
+
+  <rect x="174" y="148" width="94" height="26" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="192" y="165" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">Tab #205 — Notion</text>
+
+  <rect x="174" y="180" width="94" height="26" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="192" y="197" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">Tab #208 — Slack</text>
+
+  <!-- Sorting note -->
+  <text x="158" y="272" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280">Tabs sorted by ID (= creation order)</text>
+
+  <!-- Arrow -->
+  <line x1="306" y1="166" x2="356" y2="166" stroke="#6366f1" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <!-- Merge icon -->
+  <rect x="298" y="148" width="20" height="36" rx="4" fill="#4f46e5" opacity="0.12"/>
+  <text x="308" y="160" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#4f46e5" font-weight="700">Merge</text>
+  <text x="308" y="172" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#4f46e5" font-weight="700">click</text>
+
+  <!-- ── AFTER ── -->
+  <text x="490" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#22c55e" letter-spacing="1">AFTER</text>
+
+  <!-- Merged window -->
+  <rect x="364" y="76" width="244" height="220" rx="10" fill="white" filter="url(#card-shadow)" stroke="#bbf7d0" stroke-width="1.5"/>
+  <rect x="364" y="76" width="244" height="28" rx="10" fill="#15803d"/>
+  <rect x="364" y="90" width="244" height="14" fill="#15803d"/>
+  <text x="486" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="white">Window A  (ID 101) — all tabs merged</text>
+
+  <!-- Merged tabs sorted -->
+  <rect x="378" y="114" width="216" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="396" y="130" font-family="system-ui, sans-serif" font-size="10" fill="#166534">#201  Gmail</text>
+  <text x="572" y="130" text-anchor="end" font-family="system-ui, sans-serif" font-size="9" fill="#9ca3af">Window A</text>
+
+  <rect x="378" y="142" width="216" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="396" y="158" font-family="system-ui, sans-serif" font-size="10" fill="#166534">#202  Maps</text>
+  <text x="572" y="158" text-anchor="end" font-family="system-ui, sans-serif" font-size="9" fill="#9ca3af">Window B</text>
+
+  <rect x="378" y="170" width="216" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="396" y="186" font-family="system-ui, sans-serif" font-size="10" fill="#166534">#203  GitHub</text>
+  <text x="572" y="186" text-anchor="end" font-family="system-ui, sans-serif" font-size="9" fill="#9ca3af">Window A</text>
+
+  <rect x="378" y="198" width="216" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="396" y="214" font-family="system-ui, sans-serif" font-size="10" fill="#166534">#205  Notion</text>
+  <text x="572" y="214" text-anchor="end" font-family="system-ui, sans-serif" font-size="9" fill="#9ca3af">Window B</text>
+
+  <rect x="378" y="226" width="216" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="396" y="242" font-family="system-ui, sans-serif" font-size="10" fill="#166534">#207  Docs</text>
+  <text x="572" y="242" text-anchor="end" font-family="system-ui, sans-serif" font-size="9" fill="#9ca3af">Window A</text>
+
+  <rect x="378" y="254" width="216" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="396" y="270" font-family="system-ui, sans-serif" font-size="10" fill="#166534">#208  Slack</text>
+  <text x="572" y="270" text-anchor="end" font-family="system-ui, sans-serif" font-size="9" fill="#9ca3af">Window B</text>
+
+  <!-- Window B closed badge -->
+  <rect x="364" y="310" width="244" height="28" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <text x="486" y="329" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#ef4444">✕  Window B (ID 105) closed</text>
+
+  <!-- Footer note -->
+  <text x="320" y="374" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Focus Me — tabs are interleaved across windows in true creation order</text>
+</svg>
