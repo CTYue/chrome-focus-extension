@@ -83,6 +83,41 @@
     </div>
   </div>
 
+  <!-- Tab Cleanup -->
+  <div class="section">
+    <div class="section-title">Tab Cleanup</div>
+
+    <div class="field-row">
+      <div class="field-info">
+        <span class="field-label">Auto-close old tabs</span>
+        <span class="field-desc">Bookmark and close tabs that have been open longer than the age limit</span>
+      </div>
+      <div class="field-control">
+        <label class="toggle">
+          <input type="checkbox" id="autoCloseTabs">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-info">
+        <span class="field-label">Max tab age (hours)</span>
+        <span class="field-desc">Tabs older than this are saved to "Closed Tabs" bookmarks and closed</span>
+      </div>
+      <div class="field-control">
+        <input
+          type="number"
+          id="maxTabAgeHours"
+          class="number-input"
+          min="1"
+          max="168"
+          value="48"
+        >
+      </div>
+    </div>
+  </div>
+
   <div class="save-row">
     <button class="btn btn-primary" id="saveBtn" style="flex:0;padding:8px 20px">Save</button>
     <span class="save-status" id="saveStatus">Settings saved</span>

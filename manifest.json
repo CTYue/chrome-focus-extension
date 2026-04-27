@@ -3,7 +3,7 @@
   "name": "Focus Me",
   "version": "1.0.0",
   "description": "Stay focused by limiting Chrome windows and tabs. Extra windows are redirected as tabs.",
-  "permissions": ["windows", "tabs", "storage", "notifications"],
+  "permissions": ["windows", "tabs", "storage", "notifications", "bookmarks", "alarms"],
   "background": {
     "service_worker": "background.js"
   },

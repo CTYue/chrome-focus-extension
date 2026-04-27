@@ -17,6 +17,7 @@ A Chrome extension that helps you stay focused by limiting the number of browser
 - **Configurable limits** — max windows (default 1) and max tabs per window (default 20, set to 0 for unlimited) are adjustable at any time from the Settings page
 - **Notifications** — optional OS-level alerts explain why a window or tab was blocked (can be disabled)
 - **Focus Mode toggle** — master switch that enables or disables all enforcement in one click
+- **Auto-close old tabs** — tabs open longer than a configurable threshold (default 48 h) are automatically bookmarked under a "Closed Tabs" folder and closed
 
 ## Installation
 
@@ -57,6 +58,8 @@ Right-click the extension icon → **Options**, or click **Settings** in the pop
 | Show notifications | On | OS alert when a window or tab is blocked |
 | Max windows | 1 | Maximum number of normal Chrome windows. Extra windows are converted to tabs |
 | Max tabs per window | 20 | Maximum tabs per window. Set to 0 for no limit |
+| Auto-close old tabs | Off | Automatically close tabs older than the age limit |
+| Max tab age (hours) | 48 | Tabs older than this are bookmarked to "Closed Tabs" and closed |
 
 Settings are saved to `chrome.storage.sync` and sync across your Chrome profile on all devices.
 
@@ -93,6 +96,19 @@ When the user clicks **Merge Windows** in the popup:
 3. Tabs are moved into the oldest window at their sorted positions
 4. All other windows are closed
 5. A **merge baseline** is stored: the resulting tab count in the merged window
+
+### Auto-close old tabs
+
+When **Auto-close old tabs** is enabled, a background alarm runs every hour and:
+
+1. Queries every non-pinned, non-extension tab
+2. Checks its recorded open time against the configured age threshold
+3. Creates (or reuses) a bookmark folder named **"Closed Tabs"**
+4. Bookmarks the tab's title and URL into that folder
+5. Closes the tab
+6. Sends a notification summarising how many tabs were closed (if notifications are on)
+
+Tab open times are persisted in `chrome.storage.local` keyed by tab ID, so they survive service-worker restarts. Pinned tabs, `chrome://` pages, and extension pages are never touched.
 
 ### Merge baseline
 
@@ -160,6 +176,8 @@ After editing any source file, go to `chrome://extensions/` and click the reload
 | `tabs` | Query, move, close, and activate tabs |
 | `storage` | Persist settings via `chrome.storage.sync` |
 | `notifications` | Show OS alerts when windows or tabs are blocked |
+| `bookmarks` | Save closed tabs to the "Closed Tabs" bookmark folder |
+| `alarms` | Schedule the hourly old-tab cleanup check |
 
 The extension requests no host permissions and injects no scripts into web pages.
 

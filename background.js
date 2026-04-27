@@ -3,6 +3,8 @@ const DEFAULTS = {
   maxTabs: 20,
   enabled: true,
   notifyBlocked: true,
+  autoCloseTabs: false,
+  maxTabAgeHours: 48,
 };
 
 async function getSettings() {
@@ -80,11 +82,14 @@ chrome.windows.onCreated.addListener(async (newWindow) => {
 // back below maxTabs.
 const mergeBaselines = new Map(); // windowId → tab count at merge time
 
-// Enforce per-window tab limit.
+// Enforce per-window tab limit and record tab open times.
 chrome.tabs.onCreated.addListener(async (tab) => {
-  // Never block the extension's own pages (options, popup).
+  // Never block or track the extension's own pages (options, popup).
   const url = tab.pendingUrl || tab.url || '';
   if (url.startsWith('chrome-extension://')) return;
+
+  // Record when this tab was opened so the age-cleanup alarm can use it.
+  recordTabOpenTime(tab.id);
 
   const settings = await getSettings();
   if (!settings.enabled || settings.maxTabs <= 0) return;
@@ -109,12 +114,23 @@ chrome.tabs.onCreated.addListener(async (tab) => {
 });
 
 // Once the user closes tabs below maxTabs the merge baseline is no longer needed.
-chrome.tabs.onRemoved.addListener(async (_tabId, { windowId }) => {
-  if (!mergeBaselines.has(windowId)) return;
-  const settings = await getSettings();
-  const tabs = await chrome.tabs.query({ windowId });
-  if (tabs.length < settings.maxTabs) {
-    mergeBaselines.delete(windowId);
+// Also clean up the stored open-time for removed tabs.
+chrome.tabs.onRemoved.addListener(async (tabId, { windowId }) => {
+  // Clean up merge baseline.
+  if (mergeBaselines.has(windowId)) {
+    const settings = await getSettings();
+    const tabs = await chrome.tabs.query({ windowId });
+    if (tabs.length < settings.maxTabs) {
+      mergeBaselines.delete(windowId);
+    }
+  }
+
+  // Clean up open-time record.
+  const stored = await chrome.storage.local.get('tabOpenTimes');
+  const tabOpenTimes = stored.tabOpenTimes || {};
+  if (tabId in tabOpenTimes) {
+    delete tabOpenTimes[tabId];
+    await chrome.storage.local.set({ tabOpenTimes });
   }
 });
 
@@ -135,9 +151,12 @@ async function flashBadge() {
   }, 2500);
 }
 
-// Keep badge clear when settings change.
-chrome.storage.onChanged.addListener(async () => {
+// Keep badge clear when settings change, and reschedule cleanup alarm if needed.
+chrome.storage.onChanged.addListener(async (changes) => {
   await chrome.action.setBadgeText({ text: '' });
+  if ('autoCloseTabs' in changes || 'maxTabAgeHours' in changes) {
+    await scheduleTabCleanup();
+  }
 });
 
 // Merge all normal windows into the oldest one, ordering tabs by creation time (tab ID).
@@ -192,3 +211,82 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     return true;
   }
 });
+
+// ── Tab age cleanup ───────────────────────────────────────────────────────────
+
+async function recordTabOpenTime(tabId) {
+  const stored = await chrome.storage.local.get('tabOpenTimes');
+  const tabOpenTimes = stored.tabOpenTimes || {};
+  if (!(tabId in tabOpenTimes)) {
+    tabOpenTimes[tabId] = Date.now();
+    await chrome.storage.local.set({ tabOpenTimes });
+  }
+}
+
+async function findOrCreateBookmarkFolder(title) {
+  const results = await chrome.bookmarks.search({ title });
+  const existing = results.find((b) => b.title === title && !b.url);
+  if (existing) return existing.id;
+  const folder = await chrome.bookmarks.create({ title });
+  return folder.id;
+}
+
+async function closeOldTabs() {
+  const settings = await getSettings();
+  if (!settings.autoCloseTabs) return;
+
+  const thresholdMs = settings.maxTabAgeHours * 60 * 60 * 1000;
+  const now = Date.now();
+
+  const stored = await chrome.storage.local.get('tabOpenTimes');
+  const tabOpenTimes = stored.tabOpenTimes || {};
+
+  // Pinned tabs and extension/browser-internal pages are never touched.
+  const allTabs = await chrome.tabs.query({ pinned: false });
+  const toClose = allTabs.filter((tab) => {
+    const url = tab.pendingUrl || tab.url || '';
+    if (url.startsWith('chrome-extension://') || url.startsWith('chrome://')) return false;
+    if (!url || url === 'about:blank' || url === 'about:newtab') return false;
+    const openedAt = tabOpenTimes[tab.id];
+    return openedAt !== undefined && now - openedAt >= thresholdMs;
+  });
+
+  if (toClose.length === 0) return;
+
+  const folderId = await findOrCreateBookmarkFolder('Closed Tabs');
+  for (const tab of toClose) {
+    try {
+      await chrome.bookmarks.create({
+        parentId: folderId,
+        title: tab.title || tab.url,
+        url: tab.url,
+      });
+    } catch (_) {}
+    try {
+      await chrome.tabs.remove(tab.id);
+    } catch (_) {}
+  }
+
+  if (settings.notifyBlocked) {
+    notify(
+      'Old tabs closed',
+      `${toClose.length} tab${toClose.length > 1 ? 's' : ''} older than ${settings.maxTabAgeHours}h were bookmarked under "Closed Tabs" and closed.`
+    );
+  }
+}
+
+async function scheduleTabCleanup() {
+  await chrome.alarms.clear('checkOldTabs');
+  const settings = await getSettings();
+  if (settings.autoCloseTabs) {
+    chrome.alarms.create('checkOldTabs', { periodInMinutes: 60 });
+  }
+}
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'checkOldTabs') closeOldTabs();
+});
+
+// Re-register the alarm whenever the service worker starts up.
+chrome.runtime.onInstalled.addListener(scheduleTabCleanup);
+chrome.runtime.onStartup.addListener(scheduleTabCleanup);
