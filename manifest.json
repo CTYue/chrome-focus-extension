@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Focus Me",
+  "name": "Do One Thing",
   "version": "1.0.0",
   "description": "Stay focused by limiting Chrome windows and tabs. Extra windows are redirected as tabs.",
   "permissions": ["windows", "tabs", "storage", "notifications", "bookmarks", "alarms"],
@@ -9,7 +9,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Focus Me",
+    "default_title": "Do One Thing",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",

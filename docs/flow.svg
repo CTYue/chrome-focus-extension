@@ -101,5 +101,5 @@
   <text x="486" y="329" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#ef4444">✕  Window B (ID 105) closed</text>
 
   <!-- Footer note -->
-  <text x="320" y="374" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Focus Me — tabs are interleaved across windows in true creation order</text>
+  <text x="320" y="374" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6b7280">Do One Thing — tabs are interleaved across windows in true creation order</text>
 </svg>

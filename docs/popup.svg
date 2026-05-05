@@ -25,7 +25,7 @@
   <text x="70" y="53" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="white">🎯</text>
 
   <!-- Title -->
-  <text x="92" y="44" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="white">Focus Me</text>
+  <text x="92" y="44" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="white">Do One Thing</text>
   <text x="92" y="60" font-family="system-ui, sans-serif" font-size="10" fill="#c7d2fe">Stay in the zone</text>
 
   <!-- Focus Mode row -->
@@ -58,5 +58,5 @@
   <text x="180" y="341" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#374151">⚙  Settings</text>
 
   <!-- Caption -->
-  <text x="180" y="408" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Focus Me — Popup</text>
+  <text x="180" y="408" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Do One Thing — Popup</text>
 </svg>

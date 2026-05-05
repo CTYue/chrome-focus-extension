@@ -1,11 +1,11 @@
-# Focus Me
+# Do One Thing
 
 A Chrome extension that helps you stay focused by limiting the number of browser windows and tabs you can have open at once.
 
 <p align="center">
-  <img src="docs/popup.svg" alt="Focus Me popup" width="220"/>
+  <img src="docs/popup.svg" alt="Do One Thing popup" width="220"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/settings.svg" alt="Focus Me settings page" width="300"/>
+  <img src="docs/settings.svg" alt="Do One Thing settings page" width="300"/>
 </p>
 
 ## Features
@@ -32,13 +32,13 @@ The extension is not published to the Chrome Web Store. Load it as an unpacked e
    - Enable **Developer mode** (toggle in the top-right corner)
    - Click **Load unpacked** and select this repository folder
 
-3. The Focus Me icon will appear in your toolbar. Pin it for quick access.
+3. The Do One Thing icon will appear in your toolbar. Pin it for quick access.
 
 ## Usage
 
 ### Popup
 
-Click the Focus Me icon in the toolbar to open the popup.
+Click the Do One Thing icon in the toolbar to open the popup.
 
 | Element | Description |
 |---|---|
@@ -121,7 +121,7 @@ After a merge the single window may hold more tabs than `maxTabs`. Without speci
 ## Project structure
 
 ```
-focus-me/
+do-one-thing/
 ├── manifest.json          # Extension manifest (Manifest V3)
 ├── background.js          # Service worker — all enforcement logic
 ├── popup.html             # Toolbar popup UI
@@ -166,7 +166,7 @@ The internal 150 ms `setTimeout` inside the window-created handler is handled wi
 
 ### Reloading after changes
 
-After editing any source file, go to `chrome://extensions/` and click the reload button on the Focus Me card.
+After editing any source file, go to `chrome://extensions/` and click the reload button on the Do One Thing card.
 
 ## Permissions
 
